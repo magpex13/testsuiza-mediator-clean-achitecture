@@ -6,7 +6,7 @@ using TestSuiza.Models;
 
 namespace TestSuiza.Requests
 {
-    public class UpdateCitaHandler : IRequestHandler<UpdateCita,bool>
+    public class UpdateCitaHandler : IRequestHandler<UpdateCita, bool>
     {
         private ICitaService _citaService;
 

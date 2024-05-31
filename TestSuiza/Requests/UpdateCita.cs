@@ -1,6 +1,8 @@
-﻿namespace TestSuiza.Requests
+﻿using MediatR;
+
+namespace TestSuiza.Requests
 {
-    public class UpdateCita
+    public class UpdateCita: IRequest<bool>
     {
         public int Id { get; set; }
         public string TipoDocumento { get; set; }

@@ -4,7 +4,7 @@ using TestSuiza.Models;
 
 namespace TestSuiza.DTO
 {
-    public class GetCitas: IRequest<CitaListItem>
+    public class GetCitas: IRequest<List<CitaListItem>>
     {
         public string NumeroDocumento { get; set; }
 

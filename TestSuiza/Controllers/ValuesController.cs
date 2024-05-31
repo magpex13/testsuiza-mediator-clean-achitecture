@@ -25,10 +25,13 @@ namespace TestSuiza.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<IEnumerable<CitaListItem>> Get(string numero_documento = "")
         {
-            await _mediator.Send(new GetCitas());
-            return new string[] { "value1", "value2" };
+            var citaList = await _mediator.Send(new GetCitas()
+            {
+                NumeroDocumento = numero_documento
+            });
+            return citaList;
         }
 
         // GET api/<ValuesController>/5
@@ -48,14 +51,14 @@ namespace TestSuiza.Controllers
             }
 
             var createCita = _mapper.Map<CreateCita>(citaDto);
-            bool response = await _mediator.Send(createCita);
+            bool isOk = await _mediator.Send(createCita);
 
-            if(!response)
+            if(!isOk)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Ok(response);
+            return Ok(isOk);
         }
 
         // PUT api/<ValuesController>/5
@@ -69,17 +72,14 @@ namespace TestSuiza.Controllers
 
             citaDto.id = id;
             var updateCita = _mapper.Map<UpdateCita>(citaDto);
+            bool isOk = await _mediator.Send(updateCita);
 
-            bool response = await _mediator.Send(updateCita);
-
-            if (!response)
+            if (!isOk)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-
-            return Ok(response);
-
+            return Ok(isOk);
         }
 
         // DELETE api/<ValuesController>/5
